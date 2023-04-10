@@ -1,0 +1,53 @@
+import { useIsDesktop, useIsMobile, useIsTablet } from 'hooks/mediaQuery';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { selectToken } from 'redux/auth/authSelectors';
+import logoDesc from '../../assets/images/logo-desc.png';
+import logo from '../../assets/images/logo-tablet-mob.png';
+import logoText from '../../assets/sprite.svg';
+import { Box, Svg, Wrapper, WrapperForTabletAndMobile } from './Logo.styled';
+const Logo = () => {
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  const isDesktop = useIsDesktop();
+  const isAuth = useSelector(selectToken);
+  return (
+    <>
+      {isMobile && !isAuth ? (
+        <Box>
+          <NavLink to="diary">
+            {' '}
+            <img src={logo} alt="logo" width={46} />
+          </NavLink>
+        </Box>
+      ) : isMobile && isAuth ? (
+        <WrapperForTabletAndMobile>
+          <NavLink to="diary">
+            <img src={logo} alt="logo" width={46} />
+          </NavLink>
+          <Svg>
+            <use href={logoText + '#icon-logo-text'}></use>
+          </Svg>
+        </WrapperForTabletAndMobile>
+      ) : null}
+      {isTablet && (
+        <WrapperForTabletAndMobile>
+          <img src={logoDesc} alt="logo" width={46} />
+          <Svg>
+            <use href={logoText + '#icon-logo-text'}></use>
+          </Svg>
+        </WrapperForTabletAndMobile>
+      )}{' '}
+      {isDesktop && (
+        <Wrapper>
+          <img src={logoDesc} alt="logo" width={70} />
+          <Svg>
+            <use href={logoText + '#icon-logo-text'}></use>
+          </Svg>
+        </Wrapper>
+      )}
+    </>
+  );
+};
+
+export default Logo;
