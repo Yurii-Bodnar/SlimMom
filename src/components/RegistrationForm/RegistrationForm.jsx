@@ -1,26 +1,23 @@
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { authRegister } from 'redux/auth/authOperation';
 import {
   Box,
   Btn,
   Container,
   Form,
   Input,
-  LinkLogin,
+  Link,
   Title,
 } from './RegistrationForm.styled';
 
 const validate = values => {
   const errors = {};
-  if (!values.name) {
-    errors.name = 'Required';
-  } else if (values.name.length > 15) {
-    errors.firstName = 'Must be 15 characters or less';
-  }
-
-  if (!values.lastName) {
-    errors.lastName = 'Required';
-  } else if (values.lastName.length > 20) {
-    errors.lastName = 'Must be 20 characters or less';
+  if (!values.username) {
+    errors.username = 'Required';
+  } else if (values.username.length < 3) {
+    errors.username = 'Must be 3 characters or more';
   }
 
   if (!values.email) {
@@ -29,22 +26,33 @@ const validate = values => {
     errors.email = 'Invalid email address';
   }
 
+  if (!values.password) {
+    errors.password = 'Required';
+  } else if (values.password.length < 10) {
+    errors.password = 'Must be 10 characters or more';
+  }
   return errors;
 };
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      name: '',
+      username: '',
       email: '',
       password: '',
     },
+    validate,
     onSubmit: values => {
       const user = {
-        name: values.name,
+        username: values.username,
         email: values.email,
         password: values.password,
       };
+      dispatch(authRegister(user));
+      navigate('/login');
+      console.log('lalalal');
     },
   });
   return (
@@ -53,12 +61,16 @@ const RegistrationForm = () => {
       <Form onSubmit={formik.handleSubmit}>
         <label>
           <Input
-            id="name"
+            id="username"
             type="text"
             placeholder="Name"
             onChange={formik.handleChange}
-            value={formik.values.name}
+            onBlur={formik.handleBlur}
+            value={formik.values.username}
           />
+          {formik.errors.username && formik.touched.email ? (
+            <div>{formik.errors.username}</div>
+          ) : null}
         </label>
         <label>
           <Input
@@ -66,8 +78,12 @@ const RegistrationForm = () => {
             type="email"
             placeholder="Email"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email}
           />
+          {formik.errors.email && formik.touched.email ? (
+            <div>{formik.errors.email}</div>
+          ) : null}
         </label>
         <label>
           <Input
@@ -75,12 +91,16 @@ const RegistrationForm = () => {
             type="password"
             placeholder="Password"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.password}
           />
+          {formik.errors.password && formik.touched.email ? (
+            <div>{formik.errors.password}</div>
+          ) : null}
         </label>
         <Box>
           <Btn type="submit">Register</Btn>
-          <LinkLogin to="login">Login</LinkLogin>
+          <Link to="/login">Login</Link>
         </Box>
       </Form>
     </Container>

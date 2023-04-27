@@ -32,18 +32,22 @@ const Logo = () => {
       ) : null}
       {isTablet && (
         <WrapperForTabletAndMobile>
-          <img src={logoDesc} alt="logo" width={46} />
-          <Svg>
-            <use href={logoText + '#icon-logo-text'}></use>
-          </Svg>
+          <NavLink to="diary">
+            <img src={logoDesc} alt="logo" width={46} />
+            <Svg>
+              <use href={logoText + '#icon-logo-text'}></use>
+            </Svg>
+          </NavLink>
         </WrapperForTabletAndMobile>
       )}{' '}
       {isDesktop && (
         <Wrapper>
-          <img src={logoDesc} alt="logo" width={70} />
-          <Svg>
-            <use href={logoText + '#icon-logo-text'}></use>
-          </Svg>
+          <NavLink to="diary">
+            <img src={logoDesc} alt="logo" width={70} />
+            <Svg>
+              <use href={logoText + '#icon-logo-text'}></use>
+            </Svg>
+          </NavLink>
         </Wrapper>
       )}
     </>

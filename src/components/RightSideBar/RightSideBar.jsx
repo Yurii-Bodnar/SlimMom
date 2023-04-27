@@ -1,10 +1,10 @@
 import Header from 'components/Header/Header';
 import Navigation from 'components/Navigation/Navigation';
-import { useState } from 'react';
-import { Container, Link } from './RightSideBar.styled';
+
+import { Container } from './RightSideBar.styled';
 
 const RightSideBar = ({ isSideBarOpen, setIsSideBarOpen }) => {
-  console.log('setIsSideBarOpen', setIsSideBarOpen);
+  // console.log('setIsSideBarOpen', setIsSideBarOpen);
   return (
     <>
       {isSideBarOpen && (

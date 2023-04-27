@@ -23,12 +23,7 @@ const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
   const isDesktop = useIsDesktop();
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
-  console.log(setIsSideBarOpen);
-  // useEffect(() => {
-  //   if (isDesktop) {
-  //     setIsSideBarOpen(false);
-  //   }
-  // }, [isDesktop, setIsSideBarOpen]);
+
   const menuOpen = () => {
     setIsSideBarOpen(true);
   };
