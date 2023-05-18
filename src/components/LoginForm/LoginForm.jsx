@@ -10,6 +10,8 @@ import {
   Input,
   Title,
   Link,
+  ErrorBox,
+  Label,
 } from './LoginForm.styled';
 
 const validate = values => {
@@ -50,7 +52,7 @@ const LoginForm = () => {
     <Container>
       <Title>Sign in</Title>
       <Form onSubmit={formik.handleSubmit}>
-        <label>
+        <Label>
           <Input
             id="email"
             type="email"
@@ -60,10 +62,10 @@ const LoginForm = () => {
             value={formik.values.email}
           />
           {formik.errors.email && formik.touched.email ? (
-            <div>{formik.errors.email}</div>
+            <ErrorBox>{formik.errors.email}</ErrorBox>
           ) : null}
-        </label>
-        <label>
+        </Label>
+        <Label>
           <Input
             id="password"
             type="password"
@@ -73,9 +75,9 @@ const LoginForm = () => {
             value={formik.values.password}
           />
           {formik.errors.password && formik.touched.email ? (
-            <div>{formik.errors.password}</div>
+            <ErrorBox>{formik.errors.password}</ErrorBox>
           ) : null}
-        </label>
+        </Label>
         <Box>
           <Btn type="submit">Sign in</Btn>
           <Link to="/registration">Register</Link>

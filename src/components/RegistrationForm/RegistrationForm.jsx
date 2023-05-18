@@ -6,8 +6,10 @@ import {
   Box,
   Btn,
   Container,
+  ErrorBox,
   Form,
   Input,
+  Label,
   Link,
   Title,
 } from './RegistrationForm.styled';
@@ -59,7 +61,7 @@ const RegistrationForm = () => {
     <Container>
       <Title>Register</Title>
       <Form onSubmit={formik.handleSubmit}>
-        <label>
+        <Label>
           <Input
             id="username"
             type="text"
@@ -69,10 +71,10 @@ const RegistrationForm = () => {
             value={formik.values.username}
           />
           {formik.errors.username && formik.touched.email ? (
-            <div>{formik.errors.username}</div>
+            <ErrorBox>{formik.errors.username}</ErrorBox>
           ) : null}
-        </label>
-        <label>
+        </Label>
+        <Label>
           <Input
             id="email"
             type="email"
@@ -82,10 +84,10 @@ const RegistrationForm = () => {
             value={formik.values.email}
           />
           {formik.errors.email && formik.touched.email ? (
-            <div>{formik.errors.email}</div>
+            <ErrorBox>{formik.errors.email}</ErrorBox>
           ) : null}
-        </label>
-        <label>
+        </Label>
+        <Label>
           <Input
             id="password"
             type="password"
@@ -95,9 +97,9 @@ const RegistrationForm = () => {
             value={formik.values.password}
           />
           {formik.errors.password && formik.touched.email ? (
-            <div>{formik.errors.password}</div>
+            <ErrorBox>{formik.errors.password}</ErrorBox>
           ) : null}
-        </label>
+        </Label>
         <Box>
           <Btn type="submit">Register</Btn>
           <Link to="/login">Login</Link>

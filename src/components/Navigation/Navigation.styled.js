@@ -10,13 +10,15 @@ export const Container = styled.div`
     gap: 16px;
   }
 `;
-export const LinkCalculator = styled(NavLink)`
+export const LinkCalculator = styled.button`
   font-family: ${p => p.theme.fonts.main};
   font-weight: ${p => p.theme.fontWeights.bold};
   font-size: ${p => p.theme.fontSizes.s};
   line-height: 1.22;
   letter-spacing: 0.04em;
   color: ${p => p.theme.colors.white};
+  border: none;
+  background-color: transparent;
   @media screen and (min-width: 1280px) {
     font-family: ${p => p.theme.fonts.main};
     font-size: ${p => p.theme.fontSizes.xs};
@@ -25,7 +27,7 @@ export const LinkCalculator = styled(NavLink)`
     color: ${p => p.theme.colors.grey};
   }
 `;
-export const LinkDiary = styled(NavLink)`
+export const LinkDiary = styled.button`
   font-family: ${p => p.theme.fonts.main};
   font-weight: ${p => p.theme.fontWeights.bold};
   font-size: ${p => p.theme.fontSizes.s};
@@ -33,6 +35,8 @@ export const LinkDiary = styled(NavLink)`
   letter-spacing: 0.04em;
   color: ${p => p.theme.colors.grey};
   text-align: center;
+  border: none;
+  background-color: transparent;
   @media screen and (min-width: 1280px) {
     font-family: ${p => p.theme.fonts.main};
     font-size: ${p => p.theme.fontSizes.xs};

@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { authLogin, authRegister, logOutUser } from './authOperation';
+import {
+  authLogin,
+  authRegister,
+  logOutUser,
+  refreshUser,
+} from './authOperation';
 
 const initialState = {
   user: {
@@ -7,9 +12,12 @@ const initialState = {
     password: '',
     userName: '',
     id: null,
+    sid: null,
   },
+  isSideBarOpen: false,
   isLoading: false,
   token: null,
+  refreshToken: null,
   error: '',
 };
 
@@ -26,7 +34,14 @@ const rejectedHandler = (state, action) => {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    openModal(state, action) {
+      state.isSideBarOpen = true;
+    },
+    closeModal(state, action) {
+      state.isSideBarOpen = false;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(authRegister.pending, pendingHandlerAuth);
     builder.addCase(authRegister.rejected, rejectedHandler);
@@ -54,7 +69,9 @@ export const authSlice = createSlice({
         password: action.payload.user.password,
         userName: action.payload.user.username,
         id: action.payload.user.id,
+        sid: action.payload.sid,
       };
+      state.refreshToken = action.payload.refreshToken;
       state.token = action.payload.accessToken;
       state.isLoading = false;
       state.error = '';
@@ -67,13 +84,24 @@ export const authSlice = createSlice({
         password: '',
         userName: '',
         id: null,
+        sid: null,
       };
       state.isLoading = false;
       state.token = null;
+      state.error = '';
+    });
+    builder.addCase(refreshUser.pending, pendingHandlerAuth);
+    builder.addCase(refreshUser.rejected, rejectedHandler);
+    builder.addCase(refreshUser.fulfilled, (state, action) => {
+      state.user = { ...state.user, sid: action.payload.sid };
+      state.token = action.payload.newAccessToken;
+      state.refreshToken = action.payload.newRefreshToken;
+      state.isLoading = false;
       state.error = '';
     });
   },
 });
 
 // Action creators are generated for each case reducer function
+export const { openModal, closeModal } = authSlice.actions;
 export const authReducer = authSlice.reducer;

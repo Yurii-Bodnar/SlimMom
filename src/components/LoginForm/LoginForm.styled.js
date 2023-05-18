@@ -3,6 +3,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 40px 20px 0 20px;
+  @media screen and (min-width: 768px) {
+    padding: 160px 0 0 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding-left: 16px;
+  }
 `;
 export const Title = styled.h2`
   font-family: ${p => p.theme.fonts.main};
@@ -15,6 +21,9 @@ export const Title = styled.h2`
   margin-bottom: 40px;
 
   color: ${p => p.theme.colors.orange};
+  @media screen and (min-width: 768px) {
+    text-align: start;
+  }
 `;
 export const Form = styled.form`
   display: flex;
@@ -26,6 +35,9 @@ export const Form = styled.form`
   /* &:nth-child(even) {
     margin-bottom: 60px;
   } */
+`;
+export const Label = styled.label`
+  position: relative;
 `;
 export const Input = styled.input`
   width: 100%;
@@ -54,6 +66,9 @@ export const Input = styled.input`
   &:focus {
     outline: none;
   }
+  @media screen and (min-width: 768px) {
+    width: 240px;
+  }
 `;
 export const Box = styled.div`
   display: flex;
@@ -61,6 +76,10 @@ export const Box = styled.div`
   flex-direction: column;
   gap: 20px;
   margin-top: 40px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 32px;
+  }
 `;
 export const Btn = styled.button`
   width: 182px;
@@ -79,6 +98,12 @@ export const Btn = styled.button`
   padding: 13px 0 13px 0;
 
   color: ${p => p.theme.colors.white};
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  &:hover {
+    transform: translate(-1%, -1%);
+    box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 6px,
+      rgba(255, 255, 255, 0.3) -4px -4px 6px;
+  }
 `;
 export const Link = styled(NavLink)`
   width: 182px;
@@ -96,4 +121,24 @@ export const Link = styled(NavLink)`
   padding: 11px 0 11px 0;
 
   color: #fc842d;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  &:hover {
+    transform: translate(-1%, -1%);
+    box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 6px,
+      rgba(255, 255, 255, 0.3) -4px -4px 6px;
+  }
+`;
+export const ErrorBox = styled.div`
+  color: red;
+  position: absolute;
+  animation: placeHolderVisible 1200ms;
+
+  @keyframes placeHolderVisible {
+    0% {
+      left: -100px;
+    }
+    100% {
+      left: 0;
+    }
+  }
 `;

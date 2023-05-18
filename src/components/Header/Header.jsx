@@ -1,6 +1,6 @@
 import Logo from 'components/Logo/Logo';
-import { useSelector } from 'react-redux';
-import { selectToken } from 'redux/auth/authSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { isSideBarOpen, selectToken } from 'redux/auth/authSelectors';
 import {
   Box,
   ButtonMenu,
@@ -15,20 +15,23 @@ import burgerMenu from '../../assets/sprite.svg';
 
 import { useIsDesktop, useIsMobile, useIsTablet } from 'hooks/mediaQuery';
 import Navigation from 'components/Navigation/Navigation';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import UserInfo from 'components/UserInfo/UserInfo';
+import { closeModal, openModal } from 'redux/auth/authSlice';
 
-const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
+const Header = () => {
   const isAuth = useSelector(selectToken);
   const isDesktop = useIsDesktop();
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
-
+  const isModalOpen = useSelector(isSideBarOpen);
+  const dispatch = useDispatch();
+  console.log(isModalOpen);
   const menuOpen = () => {
-    setIsSideBarOpen(true);
+    dispatch(openModal());
   };
   const menuClose = () => {
-    setIsSideBarOpen(false);
+    dispatch(closeModal());
   };
   return (
     <HeaderWrap>
@@ -46,7 +49,7 @@ const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
             <Navigation />
           </Container>
         )}
-        {(isAuth && !isDesktop && !isSideBarOpen && isTablet && (
+        {(isAuth && !isDesktop && !isModalOpen && isTablet && (
           <Box>
             <UserInfo />
             <ButtonMenu type="button" onClick={menuOpen}>
@@ -56,14 +59,14 @@ const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
             </ButtonMenu>
           </Box>
         )) ||
-          (isAuth && !isDesktop && !isSideBarOpen && isMobile && (
+          (isAuth && !isDesktop && !isModalOpen && isMobile && (
             <ButtonMenu type="button" onClick={menuOpen}>
               <ButtonMenuIcon>
                 <use href={burgerMenu + '#icon-burger-menu'}></use>
               </ButtonMenuIcon>
             </ButtonMenu>
           )) ||
-          (isSideBarOpen && isAuth && !isDesktop && (
+          (isModalOpen && isAuth && !isDesktop && (
             <ButtonMenu type="button" onClick={menuClose}>
               <ButtonMenuIcon>
                 <use href={burgerMenu + '#icon-btnClose'}></use>
@@ -71,7 +74,7 @@ const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
             </ButtonMenu>
           ))}
       </Wrapper>
-      {isAuth && isMobile && !isSideBarOpen && <UserInfo />}
+      {isAuth && isMobile && !isModalOpen && <UserInfo />}
       {isAuth && isDesktop && <UserInfo />}
     </HeaderWrap>
   );

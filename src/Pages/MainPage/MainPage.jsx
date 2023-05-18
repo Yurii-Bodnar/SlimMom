@@ -1,23 +1,34 @@
-import Header from 'components/Header/Header';
+import CalculatorCalorieForm from 'components/CalculatorCalorieForm/CalculatorCalorieForm';
+import Modal from 'components/Modal/Modal';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
-import { useState } from 'react';
+import { useIsMobile, useIsTabletOrDesktop } from 'hooks/mediaQuery';
+
+import { useSelector } from 'react-redux';
+import { isSideBarOpen } from 'redux/auth/authSelectors';
+import { selectOpenModal } from 'redux/userData/userDataSelectors';
 
 const MainPage = () => {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const isSideBarModalOpen = useSelector(isSideBarOpen);
+
+  const isModalOpen = useSelector(selectOpenModal);
+  const isMobile = useIsMobile();
+  const isTabletOrDesc = useIsTabletOrDesktop();
+  console.log('isMob', isMobile);
   return (
     <>
-      {!isSideBarOpen && (
-        <Header
-          isSideBarOpen={isSideBarOpen}
-          setIsSideBarOpen={setIsSideBarOpen}
-        />
-      )}
-      {isSideBarOpen && (
-        <RightSideBar
-          isSideBarOpen={isSideBarOpen}
-          setIsSideBarOpen={setIsSideBarOpen}
-        />
-      )}
+      {isSideBarModalOpen && <RightSideBar />}
+      {isMobile && !isModalOpen ? (
+        <CalculatorCalorieForm />
+      ) : isMobile && isModalOpen ? (
+        <Modal />
+      ) : null}
+      {isTabletOrDesc && !isModalOpen ? (
+        <CalculatorCalorieForm />
+      ) : isTabletOrDesc && isModalOpen ? (
+        <>
+          <CalculatorCalorieForm /> <Modal />
+        </>
+      ) : null}
     </>
   );
 };
