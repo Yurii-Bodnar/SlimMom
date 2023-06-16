@@ -21,6 +21,7 @@ import { modalClose } from 'redux/userData/userDataSlice';
 import { useIsTabletOrDesktop } from 'hooks/mediaQuery';
 import iconBtnClose from '../../assets/sprite.svg';
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 const DailyCalorieIntake = () => {
   const dailyRate = useSelector(selectModalDataDailyRate);
@@ -28,23 +29,29 @@ const DailyCalorieIntake = () => {
   const dispatch = useDispatch();
   const isTabletOrDesc = useIsTabletOrDesktop();
   const isModalOpen = useSelector(selectOpenModal);
+  const modalRoot = document.querySelector('#modal');
 
-  // useEffect(() => {
-  //   if (isModalOpen) {
-  //     document.body.style.overflow = 'hidden';
-  //   }
-  //   if (!isModalOpen) {
-  //     document.body.style.overflow = '';
-  //   }
-  // }, [isModalOpen]);
-  // const handleClose = (event)=>{
-  //   if(event.target === event.CurrentTarget){
+  useEffect(() => {
+    const handleClose = e => {
+      if (e.code === 'Escape') {
+        dispatch(modalClose());
+      }
+    };
+    window.addEventListener('keydown', handleClose);
+    return () => {
+      window.removeEventListener('keydown', handleClose);
+      document.body.style.overflow = 'auto';
+    };
+  }, [isModalOpen, dispatch]);
 
-  //   }
-  // }
+  const closeBackdrop = e => {
+    if (e.target === e.currentTarget) {
+      dispatch(modalClose());
+    }
+  };
 
-  return (
-    <Container>
+  return createPortal(
+    <Container onClick={e => closeBackdrop(e)}>
       <Wrapper>
         {isTabletOrDesc && (
           <>
@@ -83,7 +90,8 @@ const DailyCalorieIntake = () => {
           </BtnLosingWeightBox>
         </ul>
       </Wrapper>
-    </Container>
+    </Container>,
+    modalRoot
   );
 };
 

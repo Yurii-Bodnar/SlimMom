@@ -1,4 +1,4 @@
-import CalculatorCalorieForm from 'components/CalculatorCalorieForm/CalculatorCalorieForm';
+import DailyCaloriesForm from 'components/DailyCaloriesForm/DailyCaloriesForm';
 import Modal from 'components/Modal/Modal';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
 import { useIsMobile, useIsTabletOrDesktop } from 'hooks/mediaQuery';
@@ -13,20 +13,19 @@ const MainPage = () => {
   const isModalOpen = useSelector(selectOpenModal);
   const isMobile = useIsMobile();
   const isTabletOrDesc = useIsTabletOrDesktop();
-  console.log('isMob', isMobile);
   return (
     <>
       {isSideBarModalOpen && <RightSideBar />}
       {isMobile && !isModalOpen ? (
-        <CalculatorCalorieForm />
+        <DailyCaloriesForm />
       ) : isMobile && isModalOpen ? (
         <Modal />
       ) : null}
       {isTabletOrDesc && !isModalOpen ? (
-        <CalculatorCalorieForm />
+        <DailyCaloriesForm />
       ) : isTabletOrDesc && isModalOpen ? (
         <>
-          <CalculatorCalorieForm /> <Modal />
+          <DailyCaloriesForm /> <Modal />
         </>
       ) : null}
     </>

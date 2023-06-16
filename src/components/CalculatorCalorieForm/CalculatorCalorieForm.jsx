@@ -8,16 +8,21 @@ import {
   Btn,
   Container,
   DivRadio,
+  ErrorBox,
   Form,
   Input,
+  Label,
   Title,
   WrapperRadio,
   WrapperRadioBtn,
   WrapperRadioLabel,
   WrapperSubmit,
 } from './CalculatorCalorieForm.styled';
-import { useDispatch } from 'react-redux';
-import { calculateDailyRate } from 'redux/userData/userDataOperation';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  calculateDailyRate,
+  calculateDailyRateForSignUser,
+} from 'redux/userData/userDataOperation';
 import { modalOpen } from 'redux/userData/userDataSlice';
 
 const validate = values => {
@@ -60,6 +65,8 @@ const validate = values => {
 
 const CalculatorCalorieForm = () => {
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.auth.user.id);
+  console.log(userId);
 
   const formik = useFormik({
     initialValues: {
@@ -78,9 +85,9 @@ const CalculatorCalorieForm = () => {
         desiredWeight: values.desiredWeight,
         bloodType: values.bloodType,
       };
-      console.log(dataUser);
-      dispatch(calculateDailyRate(dataUser));
-      dispatch(modalOpen());
+      const fetchUser = { userId, dataUser };
+      console.log(fetchUser);
+      dispatch(calculateDailyRateForSignUser(fetchUser));
     },
   });
   return (
@@ -89,7 +96,7 @@ const CalculatorCalorieForm = () => {
       <Form onSubmit={formik.handleSubmit}>
         <BoxForTabletAndDesc>
           <BoxForTabletAndDescSecond>
-            <label>
+            <Label>
               <Input
                 type="text"
                 id="height"
@@ -99,10 +106,10 @@ const CalculatorCalorieForm = () => {
                 value={formik.values.height}
               />
               {formik.errors.height && formik.touched.height ? (
-                <div>{formik.errors.height}</div>
+                <ErrorBox>{formik.errors.height}</ErrorBox>
               ) : null}
-            </label>
-            <label>
+            </Label>
+            <Label>
               <Input
                 type="text"
                 placeholder="Age"
@@ -112,10 +119,10 @@ const CalculatorCalorieForm = () => {
                 value={formik.values.age}
               />
               {formik.errors.age && formik.touched.age ? (
-                <div>{formik.errors.age}</div>
+                <ErrorBox>{formik.errors.age}</ErrorBox>
               ) : null}
-            </label>
-            <label>
+            </Label>
+            <Label>
               <Input
                 type="text"
                 placeholder="Current weight"
@@ -125,12 +132,12 @@ const CalculatorCalorieForm = () => {
                 value={formik.values.weight}
               />
               {formik.errors.weight && formik.touched.weight ? (
-                <div>{formik.errors.weight}</div>
+                <ErrorBox>{formik.errors.weight}</ErrorBox>
               ) : null}
-            </label>
+            </Label>
           </BoxForTabletAndDescSecond>
           <BoxForTabletAndDescThird>
-            <label>
+            <Label>
               <Input
                 type="text"
                 placeholder="Desired weight"
@@ -140,13 +147,13 @@ const CalculatorCalorieForm = () => {
                 value={formik.values.desiredWeight}
               />
               {formik.errors.desiredWeight && formik.touched.desiredWeight ? (
-                <div>{formik.errors.desiredWeight}</div>
+                <ErrorBox>{formik.errors.desiredWeight}</ErrorBox>
               ) : null}
-            </label>
+            </Label>
             <Box>
               <BoxTitle>Blood type {formik.values.bloodType}</BoxTitle>
               {formik.errors.bloodType && formik.touched.bloodType ? (
-                <div>{formik.errors.bloodType}</div>
+                <ErrorBox>{formik.errors.bloodType}</ErrorBox>
               ) : null}
             </Box>
             <WrapperRadio>

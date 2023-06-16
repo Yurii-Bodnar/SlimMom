@@ -1,27 +1,33 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, LinkCalculator, LinkDiary } from './Navigation.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { isSideBarOpen } from 'redux/auth/authSelectors';
 import { closeModal } from 'redux/auth/authSlice';
+import { setMobileFormAddProductsClose } from 'redux/products/productSlice';
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const isModalOpen = useSelector(isSideBarOpen);
   const dispatch = useDispatch();
   const handleDiary = () => {
     dispatch(closeModal());
+    dispatch(setMobileFormAddProductsClose());
     navigate('/diary');
   };
   const handleCalculator = () => {
     dispatch(closeModal());
+    dispatch(setMobileFormAddProductsClose());
     navigate('/calculator');
   };
+  const location = useLocation();
   return (
     <Container>
-      <LinkDiary type="button" onClick={handleDiary}>
+      <LinkDiary type="button" onClick={handleDiary} location={location}>
         DIARY
       </LinkDiary>
-      <LinkCalculator type="button" onClick={handleCalculator}>
+      <LinkCalculator
+        type="button"
+        onClick={handleCalculator}
+        location={location}
+      >
         CALCULATOR
       </LinkCalculator>
     </Container>

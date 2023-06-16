@@ -11,9 +11,7 @@ export const Container = styled.div`
     align-items: flex-start;
   }
   @media screen and (min-width: 1280px) {
-    padding: 0px 0 0 16px;
-    justify-content: flex-start;
-    padding-top: 150px;
+    padding: 140px 0 0 16px;
   }
 `;
 export const Title = styled.h2`
@@ -27,9 +25,6 @@ export const Title = styled.h2`
     font-size: ${p => p.theme.fontSizes.l};
     line-height: 1.2;
     margin-bottom: 68px;
-  }
-  @media screen and (min-width: 1280px) {
-    width: 544px;
   }
 `;
 export const Form = styled.form`

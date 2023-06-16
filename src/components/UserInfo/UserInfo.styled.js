@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.section`
+  position: relative;
   display: flex;
   justify-content: flex-end;
   gap: 16px;
@@ -11,9 +12,25 @@ export const Container = styled.div`
   }
   @media screen and (min-width: 1280px) {
     align-items: center;
-    padding-left: 277px;
+    /* padding-left: 277px; */
     padding-top: 102px;
+    width: 517px;
   }
+`;
+export const BtnBox = styled.div`
+  position: absolute;
+  top: 11px;
+  left: 20px;
+`;
+export const BtnBack = styled.button`
+  border: none;
+  background-color: transparent;
+  width: 32px;
+  height: 27px;
+`;
+export const Svg = styled.svg`
+  width: 32px;
+  height: 27px;
 `;
 export const TextName = styled.p`
   font-family: ${p => p.theme.fonts.main};

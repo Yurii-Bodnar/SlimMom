@@ -7,7 +7,6 @@ import { isSideBarOpen } from 'redux/auth/authSelectors';
 
 const RightSideBar = () => {
   const isModalOpen = useSelector(isSideBarOpen);
-  // console.log('setIsSideBarOpen', setIsSideBarOpen);
   return (
     <>
       {isModalOpen && (

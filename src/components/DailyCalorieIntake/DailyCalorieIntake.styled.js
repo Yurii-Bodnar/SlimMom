@@ -11,8 +11,16 @@ export const Container = styled.div`
     position: absolute;
     width: 100%;
     height: 1024px;
-    top: 0;
+    /* top: 0; */
     padding: 0;
+
+    background: rgba(33, 33, 33, 0.12);
+    position: absolute;
+    width: 100%;
+    height: 1024px;
+    /* height: 100%; */
+    top: 0px;
+    padding: 0px;
   }
   @media screen and (min-width: 1280px) {
     height: 880px;
@@ -23,7 +31,7 @@ export const Wrapper = styled.div`
     background-color: ${p => p.theme.colors.white};
     padding: 64px 82px 81px;
     box-shadow: 0px 22px 40px rgba(0, 0, 0, 0.1);
-    position: relative;
+    /* position: relative; */
     animation: 0.7s cubic-bezier(0.39, 0.575, 0.565, 1) 0s 1 normal both running
       slowAppearance;
     @keyframes slowAppearance {
@@ -34,6 +42,13 @@ export const Wrapper = styled.div`
         transform: scale(1);
       }
     }
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* position: absolute;
+    top: 10%;
+    left: 15%; */
   }
 `;
 export const Title = styled.h2`

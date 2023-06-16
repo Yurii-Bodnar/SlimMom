@@ -1,5 +1,31 @@
+import DiaryProductsListItem from 'components/DiaryProductsListItem/DiaryProductsListItem';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {} from 'redux/products/productsSelectors';
+import { getInfoDay } from 'redux/userData/userDataOperation';
+import {
+  selectDataCalendar,
+  selectEatenProducts,
+  selectEatenProductsAfterAddOperation,
+} from 'redux/userData/userDataSelectors';
+import { List } from './DiaryProductsList.styled';
+
 const DiaryProductsList = () => {
-  return <div>DiaryProductsList</div>;
+  const product = useSelector(selectEatenProducts);
+  const productsAfterAddOperation = useSelector(
+    selectEatenProductsAfterAddOperation
+  );
+  // console.log('products===>', products);
+  // console.log('after', productsAfterAddOperation);
+  return (
+    <>
+      {product || productsAfterAddOperation ? (
+        <List>
+          <DiaryProductsListItem />
+        </List>
+      ) : null}
+    </>
+  );
 };
 
 export default DiaryProductsList;

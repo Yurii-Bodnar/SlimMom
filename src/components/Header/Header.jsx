@@ -26,7 +26,6 @@ const Header = () => {
   const isMobile = useIsMobile();
   const isModalOpen = useSelector(isSideBarOpen);
   const dispatch = useDispatch();
-  console.log(isModalOpen);
   const menuOpen = () => {
     dispatch(openModal());
   };

@@ -1,15 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { setAuthHeader } from 'utility/auxiliaryFunctions';
 
 axios.defaults.baseURL = 'https://slimmom-backend.goit.global';
 
-export const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
+// const clearAuthHeader = () => {
+//   axios.defaults.headers.common.Authorization = '';
+// };
 
 export const authRegister = createAsyncThunk(
   '/auth/register',
@@ -60,7 +57,6 @@ export const refreshUser = createAsyncThunk(
       const token = state.auth.refreshToken;
       setAuthHeader(token);
       const response = await axios.post('/auth/refresh', { sid: sid });
-      console.log('refresh', response.data);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.response.data.message);

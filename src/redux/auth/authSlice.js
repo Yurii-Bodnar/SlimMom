@@ -14,10 +14,12 @@ const initialState = {
     id: null,
     sid: null,
   },
+  isLoggedIn: false,
   isSideBarOpen: false,
   isLoading: false,
-  token: null,
-  refreshToken: null,
+  token: '',
+  refreshToken: '',
+  prevToken: '',
   error: '',
 };
 
@@ -75,6 +77,7 @@ export const authSlice = createSlice({
       state.token = action.payload.accessToken;
       state.isLoading = false;
       state.error = '';
+      state.isLoggedIn = true;
     });
     builder.addCase(logOutUser.pending, pendingHandlerAuth);
     builder.addCase(logOutUser.rejected, rejectedHandler);
@@ -89,6 +92,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.token = null;
       state.error = '';
+      state.isLoggedIn = false;
     });
     builder.addCase(refreshUser.pending, pendingHandlerAuth);
     builder.addCase(refreshUser.rejected, rejectedHandler);
@@ -98,6 +102,7 @@ export const authSlice = createSlice({
       state.refreshToken = action.payload.newRefreshToken;
       state.isLoading = false;
       state.error = '';
+      state.isLoggedIn = true;
     });
   },
 });
