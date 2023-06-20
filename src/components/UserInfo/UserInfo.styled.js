@@ -12,7 +12,6 @@ export const Container = styled.section`
   }
   @media screen and (min-width: 1280px) {
     align-items: center;
-    /* padding-left: 277px; */
     padding-top: 102px;
     width: 517px;
   }

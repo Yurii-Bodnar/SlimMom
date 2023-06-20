@@ -18,15 +18,13 @@ const Modal = () => {
     const scrollToTop = () => {
       if (isTablet) {
         window.scroll({
-          top: 255,
-          // left: 100,
+          top: 155,
           behavior: 'smooth',
         });
       }
       if (isDesktop) {
         window.scroll({
           top: 140,
-          // left: 100,
           behavior: 'smooth',
         });
       }
@@ -34,7 +32,7 @@ const Modal = () => {
     if (isModalOpen) {
       scrollToTop();
     }
-  }, [isModalOpen]);
+  }, [isDesktop, isModalOpen, isTablet]);
   return (
     <>
       {isMobile && (

@@ -8,12 +8,13 @@ export const selectDailyRateForFist = state =>
 export const selectNotAllowedProducts = state =>
   state.userData.user?.userData.notAllowedProducts;
 export const selectDataCalendar = state => state.userData.data;
-export const selectKcalLeft = state => state.userData.userSummary?.kcalLeft;
-export const selectConsumed = state => state.userData.userSummary?.kcalConsumed;
 export const selectDailyRate = state => state.userData.userSummary?.dailyRate;
-export const selectPercent = state =>
-  state.userData.userSummary?.percentsOfDailyRate;
+export const selectDateNow = state =>
+  state.userData.userSummary?.daySummary?.date;
 export const selectEatenProducts = state =>
   state.userData.userSummary?.eatenProducts;
 export const selectEatenProductsAfterAddOperation = state =>
   state.userData.userSummary?.day?.eatenProducts;
+export const selectDaySummary = state => state.userData.userSummary?.daySummary;
+export const selectDate = state => state.userData.userSummary?.date;
+export const selectSummary = state => state.userData.userSummary;

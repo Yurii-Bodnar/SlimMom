@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 export const Container = styled.div`
   position: relative;
+  z-index: 10;
 `;
 export const Section = styled.section`
   padding: 40px 0 0 20px;

@@ -15,11 +15,10 @@ const DiaryProductsList = () => {
   const productsAfterAddOperation = useSelector(
     selectEatenProductsAfterAddOperation
   );
-  // console.log('products===>', products);
-  // console.log('after', productsAfterAddOperation);
+
   return (
     <>
-      {product || productsAfterAddOperation ? (
+      {product?.length > 0 || productsAfterAddOperation?.length > 0 ? (
         <List>
           <DiaryProductsListItem />
         </List>

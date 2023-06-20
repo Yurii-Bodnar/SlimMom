@@ -4,7 +4,6 @@ import bgForDesc from '../../assets/images/leaf-for-user-info-desc.png';
 export const Container = styled.div`
   padding: 40px 20px 24px 20px;
   background-color: #f0f1f3;
-  /* position: relative; */
   @media screen and (min-width: 768px) {
     display: flex;
     gap: 80px;
@@ -19,7 +18,6 @@ export const Container = styled.div`
     gap: 60px;
     height: 100vh;
     padding-top: 150px;
-    /* padding-bottom: 100%; */
     background: url(${bgForDesc}) no-repeat right top 120% #f0f1f3;
   }
   @media screen and (min-width: 1280px) and (min-height: 621px) and (max-height: 655px) {
@@ -30,7 +28,6 @@ export const Container = styled.div`
     gap: 60px;
     height: 100vh;
     padding-top: 150px;
-    /* padding-bottom: 100%; */
     background: url(${bgForDesc}) no-repeat right bottom -400% #f0f1f3;
   }
   @media screen and (min-width: 1280px) and (min-height: 656px) {
@@ -41,7 +38,6 @@ export const Container = styled.div`
     gap: 60px;
     height: 100vh;
     padding-top: 150px;
-    /* padding-bottom: 100%; */
     background: url(${bgForDesc}) no-repeat right bottom 120% #f0f1f3;
   }
 `;

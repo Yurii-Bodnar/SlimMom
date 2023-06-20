@@ -1,6 +1,4 @@
-const {
-  default: RegistrationForm,
-} = require('components/RegistrationForm/RegistrationForm');
+import RegistrationForm from 'components/RegistrationForm/RegistrationForm';
 
 const RegistrationPage = () => {
   return <RegistrationForm />;

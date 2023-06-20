@@ -2,13 +2,11 @@ import { useFormik } from 'formik';
 import btnPlus from '../../assets/sprite.svg';
 import { useIsMobile, useIsTabletOrDesktop } from 'hooks/mediaQuery';
 import { useDispatch, useSelector } from 'react-redux';
-import { setMobileFormAddProductsOpen } from 'redux/products/productSlice';
 import {
   selectMobileFromAddProduct,
   selectProductSearch,
 } from 'redux/products/productsSelectors';
 import {
-  BoxForMobile,
   Btn,
   BtnAdd,
   BtnAddWrapper,
@@ -20,17 +18,8 @@ import {
 } from './DiaryAddProductForm.styled';
 import { searchByQueryProduct } from 'redux/products/productsOperation';
 import { selectDataCalendar } from 'redux/userData/userDataSelectors';
-import {
-  addProduct,
-  getCurrentUser,
-  getInfoDay,
-} from 'redux/userData/userDataOperation';
-import {
-  correctDataForAddProductOperation,
-  correctDataForSummary,
-  correctDateForAddOperation,
-  dateToRequest,
-} from 'utility/auxiliaryFunctions';
+import { addProduct } from 'redux/userData/userDataOperation';
+import { correctDateForAddOperation } from 'utility/auxiliaryFunctions';
 
 const DiaryAddProductForm = () => {
   const isMobile = useIsMobile();
@@ -39,14 +28,7 @@ const DiaryAddProductForm = () => {
   const isMobileFormOpen = useSelector(selectMobileFromAddProduct);
   const productsSearch = useSelector(selectProductSearch);
   const date = useSelector(selectDataCalendar);
-  console.log(date);
-  // const goToFormForMobile = () => {
-  //   dispatch(setMobileFormAddProductsOpen());
-  // };
-  const resetForm = (name, grams) => {
-    name = '';
-    grams = '';
-  };
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -62,14 +44,13 @@ const DiaryAddProductForm = () => {
       };
 
       dispatch(addProduct(product));
-      resetForm(formik.values.name, formik.values.grams);
+      formik.resetForm();
     },
   });
   return (
     <>
       {isMobile && isMobileFormOpen ? (
         <Form onSubmit={formik.handleSubmit}>
-          {/* <FormBox> */}
           <FormBox>
             <Input
               id="name"

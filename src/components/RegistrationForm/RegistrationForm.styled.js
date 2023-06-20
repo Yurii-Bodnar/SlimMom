@@ -29,12 +29,6 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* &:nth-child(1) {
-    margin-bottom: 20px;
-  } */
-  /* &:nth-child(even) {
-    margin-bottom: 60px;
-  } */
 `;
 export const Label = styled.label`
   position: relative;
@@ -51,7 +45,6 @@ export const Input = styled.input`
   color: ${p => p.theme.colors.black};
   text-align: unset;
   padding: 20px 0 20px 0;
-  /* margin-bottom: 20px; */
 
   &::placeholder {
     font-family: ${p => p.theme.fonts.main};

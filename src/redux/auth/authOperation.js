@@ -4,10 +4,6 @@ import { setAuthHeader } from 'utility/auxiliaryFunctions';
 
 axios.defaults.baseURL = 'https://slimmom-backend.goit.global';
 
-// const clearAuthHeader = () => {
-//   axios.defaults.headers.common.Authorization = '';
-// };
-
 export const authRegister = createAsyncThunk(
   '/auth/register',
   async (user, thunkApi) => {

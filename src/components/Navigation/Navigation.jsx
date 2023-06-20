@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, LinkCalculator, LinkDiary } from './Navigation.styled';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { closeModal } from 'redux/auth/authSlice';
 import { setMobileFormAddProductsClose } from 'redux/products/productSlice';
 

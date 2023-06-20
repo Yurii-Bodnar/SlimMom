@@ -1,4 +1,3 @@
-import { useIsDesktop } from 'hooks/mediaQuery';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logOutUser } from 'redux/auth/authOperation';
@@ -24,16 +23,15 @@ const UserInfo = () => {
   const logOutHandler = () => {
     dispatch(logOutUser());
     navigate('/');
-    console.log('here');
+  };
+  const handleBack = () => {
+    dispatch(setMobileFormAddProductsClose());
   };
   return (
     <Container>
       {isMobileFormOpen && (
         <BtnBox>
-          <BtnBack
-            type="button"
-            onClick={() => dispatch(setMobileFormAddProductsClose)}
-          >
+          <BtnBack type="button" onClick={handleBack}>
             <Svg>
               <use href={backForMobileBtn + '#icon-back-for-mobile-form'}></use>
             </Svg>

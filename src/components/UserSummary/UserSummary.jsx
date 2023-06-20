@@ -12,13 +12,10 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { useIsTabletOrDesktop } from 'hooks/mediaQuery';
 import {
-  selectConsumed,
-  selectDailyRate,
   selectDailyRateForFist,
   selectDataCalendar,
-  selectKcalLeft,
   selectModalDataNotAllowedProducts,
-  selectPercent,
+  selectSummary,
 } from 'redux/userData/userDataSelectors';
 import {
   correctDataForSummary,
@@ -28,16 +25,8 @@ import {
 const UserSummary = () => {
   const dailyRateForFist = useSelector(selectDailyRateForFist);
   const notAllowedProducts = useSelector(selectModalDataNotAllowedProducts);
-  // const leftKcal = useSelector(selectKcalLeft);
-  // const costumed = useSelector(selectConsumed);
-  // const dailyRateForSummary = useSelector(selectDailyRate);
-  // const percent = useSelector(selectPercent);
-  const summary = useSelector(state => state.userData.userSummary);
-  console.log(summary);
-  // const { kcalLeft, kcalConsumed, percentsOfDailyRate, dailyRate } =
-  //   summary?.daySummary;
-  // console.log(costumed);
-  // console.log(kcalConsumed);
+  const summary = useSelector(selectSummary);
+
   const isTabletOrDesc = useIsTabletOrDesktop();
   const dataToday = useSelector(selectDataCalendar);
 

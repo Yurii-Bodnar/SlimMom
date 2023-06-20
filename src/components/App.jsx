@@ -1,4 +1,4 @@
-import { lazy, useEffect, useMemo } from 'react';
+import { lazy, useEffect } from 'react';
 import { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Loader from './Loader/Loader';
@@ -6,7 +6,7 @@ import SharedLayout from './SharedLayout/SharedLayout';
 import { PublicRoute } from './PublicRoute/PublicRoute';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIdUser, selectSid, selectToken } from 'redux/auth/authSelectors';
+import { selectSid, selectToken } from 'redux/auth/authSelectors';
 import { refreshUser } from 'redux/auth/authOperation';
 import bgForDesc from '../assets/images/background-desc.png';
 import bgForTablet from '../assets/images/background-tabl.png';
@@ -26,17 +26,13 @@ const DiaryPage = lazy(() => import('../Pages/DiaryPage/DiaryPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  // const isSignInUser = useSelector(selectToken);
   const isDesktop = useIsDesktop();
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
   const sid = useSelector(selectSid);
   const isSignInUser = useSelector(selectToken);
   const isLoggedInUser = useSelector(state => state.auth.isLoggedIn);
-  // const user = useSelector(state => state.auth.user);
-  // const refreshing = useMemo(() => {
-  //   !isSignInUser && dispatch(refreshUser(sid));
-  // }, [dispatch, isSignInUser, sid]);
+
   useEffect(() => {
     isSignInUser === '' && dispatch(refreshUser(sid));
   }, [dispatch, sid, isSignInUser]);
@@ -58,15 +54,12 @@ export const App = () => {
     }
   }, [isDesktop, isMobile, isSignInUser, isTablet]);
   useEffect(() => {
-    // setTimeout(() => {
     if (isLoggedInUser) {
       dispatch(getCurrentUser());
       const value = new Date();
       dispatch(getInfoDay({ date: dateToRequest(value) }));
     }
-    // }, 10000);
   }, [dispatch, isLoggedInUser, isSignInUser]);
-  // console.log('====>', isSignInUser);
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
@@ -76,7 +69,6 @@ export const App = () => {
             element={
               <PublicRoute redirectTo="/calculator" component={<MainPage />} />
             }
-            // element={<MainPage />}
           />
           <Route
             path="/registration"
@@ -101,7 +93,9 @@ export const App = () => {
           />
           <Route
             path="/diary"
-            element={<PrivateRoute redirectTo="/" component={<DiaryPage />} />}
+            element={
+              <PrivateRoute redirectTo="/diary" component={<DiaryPage />} />
+            }
           />
         </Route>
         <Route path="*" element={<Navigate to={'/'} />} />

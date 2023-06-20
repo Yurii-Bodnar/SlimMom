@@ -6,7 +6,7 @@ import { Container } from './DiaryPage.styled';
 import DiaryDateCalendar from 'components/DiaryDateCalendar/DiaryDateCalendar';
 import DiaryProductsList from 'components/DiaryProductsList/DiaryProductsList';
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
-import { useIsMobile, useIsTabletOrDesktop } from 'hooks/mediaQuery';
+import { useIsMobile } from 'hooks/mediaQuery';
 import { selectMobileFromAddProduct } from 'redux/products/productsSelectors';
 import {
   BoxForMobile,
@@ -20,7 +20,6 @@ const DiaryPage = () => {
   const isModalOpen = useSelector(isSideBarOpen);
   const isMobile = useIsMobile();
   const isMobileFormOpen = useSelector(selectMobileFromAddProduct);
-  const isTabletOrDesktop = useIsTabletOrDesktop();
   const dispatch = useDispatch();
   const goToFormForMobile = () => {
     dispatch(setMobileFormAddProductsOpen());

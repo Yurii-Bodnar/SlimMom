@@ -84,7 +84,9 @@ export const userDataSlice = createSlice({
     builder.addCase(deleteProduct.pending, pendingHandlerAuth);
     builder.addCase(deleteProduct.rejected, rejectedHandler);
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
-      state.userSummary.daySummary = action.payload;
+      state.userSummary.daySummary = action.payload.newDaySummary;
+      state.isLoading = false;
+      state.error = '';
     });
   },
 });

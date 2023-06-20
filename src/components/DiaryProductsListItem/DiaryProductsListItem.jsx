@@ -9,16 +9,30 @@ import {
 } from './DiaryProductsListItem.styled';
 import btnDeleteIcon from '../../assets/sprite.svg';
 import {
+  selectDateNow,
   selectEatenProducts,
   selectEatenProductsAfterAddOperation,
 } from 'redux/userData/userDataSelectors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProduct, getInfoDay } from 'redux/userData/userDataOperation';
 
 const DiaryProductsListItem = () => {
   const products = useSelector(selectEatenProducts);
   const productsAfterAddOperation = useSelector(
     selectEatenProductsAfterAddOperation
   );
+  const daySummary = useSelector(state => state.userData.userSummary?.id);
+  const date = useSelector(selectDateNow);
+  const dispatch = useDispatch();
+
+  const deleteProductHandler = e => {
+    const dataProduct = {
+      dayId: daySummary,
+      eatenProductId: e.currentTarget.id,
+    };
+    dispatch(deleteProduct(dataProduct));
+    dispatch(getInfoDay({ date: date }));
+  };
 
   return (
     <>
@@ -29,7 +43,11 @@ const DiaryProductsListItem = () => {
               <TextGrams>{weight}g</TextGrams>
               <TextKcal>{Math.ceil(kcal)}kcal</TextKcal>
               <BtnBox>
-                <Btn type="button">
+                <Btn
+                  type="button"
+                  id={id}
+                  onClick={e => deleteProductHandler(e)}
+                >
                   <Svg>
                     <use href={btnDeleteIcon + '#icon-btn-delete'}></use>
                   </Svg>
@@ -44,7 +62,11 @@ const DiaryProductsListItem = () => {
               <TextGrams>{weight}g</TextGrams>
               <TextKcal>{Math.ceil(kcal)}kcal</TextKcal>
               <BtnBox>
-                <Btn type="button">
+                <Btn
+                  type="button"
+                  id={id}
+                  onClick={e => deleteProductHandler(e)}
+                >
                   <Svg>
                     <use href={btnDeleteIcon + '#icon-btn-delete'}></use>
                   </Svg>

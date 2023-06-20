@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.section`
   padding: 40px 20px 0 20px;
   @media screen and (min-width: 768px) {
     padding: 160px 0 0 32px;
@@ -29,12 +29,6 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* &:nth-child(1) {
-    margin-bottom: 20px;
-  } */
-  /* &:nth-child(even) {
-    margin-bottom: 60px;
-  } */
 `;
 export const Label = styled.label`
   position: relative;
@@ -51,7 +45,6 @@ export const Input = styled.input`
   color: ${p => p.theme.colors.black};
   text-align: unset;
   padding: 20px 0 20px 0;
-  /* margin-bottom: 20px; */
 
   &::placeholder {
     font-family: ${p => p.theme.fonts.main};
