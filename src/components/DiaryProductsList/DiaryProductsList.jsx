@@ -1,10 +1,6 @@
 import DiaryProductsListItem from 'components/DiaryProductsListItem/DiaryProductsListItem';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {} from 'redux/products/productsSelectors';
-import { getInfoDay } from 'redux/userData/userDataOperation';
+import { useSelector } from 'react-redux';
 import {
-  selectDataCalendar,
   selectEatenProducts,
   selectEatenProductsAfterAddOperation,
 } from 'redux/userData/userDataSelectors';
