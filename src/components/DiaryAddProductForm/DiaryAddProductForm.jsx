@@ -17,8 +17,11 @@ import {
   Svg,
 } from './DiaryAddProductForm.styled';
 import { searchByQueryProduct } from 'redux/products/productsOperation';
-import { selectDataCalendar } from 'redux/userData/userDataSelectors';
-import { addProduct } from 'redux/userData/userDataOperation';
+import {
+  selectDataCalendar,
+  selectDateNow,
+} from 'redux/userData/userDataSelectors';
+import { addProduct, getInfoDay } from 'redux/userData/userDataOperation';
 import { correctDateForAddOperation } from 'utility/auxiliaryFunctions';
 
 const DiaryAddProductForm = () => {
@@ -28,6 +31,7 @@ const DiaryAddProductForm = () => {
   const isMobileFormOpen = useSelector(selectMobileFromAddProduct);
   const productsSearch = useSelector(selectProductSearch);
   const date = useSelector(selectDataCalendar);
+  const dateForGetInfo = useSelector(selectDateNow);
 
   const formik = useFormik({
     initialValues: {
@@ -44,6 +48,7 @@ const DiaryAddProductForm = () => {
       };
 
       dispatch(addProduct(product));
+      dispatch(getInfoDay({ date: dateForGetInfo }));
       formik.resetForm();
     },
   });

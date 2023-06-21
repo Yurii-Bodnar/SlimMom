@@ -18,3 +18,5 @@ export const selectEatenProductsAfterAddOperation = state =>
 export const selectDaySummary = state => state.userData.userSummary?.daySummary;
 export const selectDate = state => state.userData.userSummary?.date;
 export const selectSummary = state => state.userData.userSummary;
+export const selectDayId = state => state.userData.userSummary?.day?.id;
+export const selectDayIdSecond = state => state.userData.userSummary?.id;

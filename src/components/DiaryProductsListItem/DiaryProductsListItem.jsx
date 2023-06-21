@@ -9,7 +9,10 @@ import {
 } from './DiaryProductsListItem.styled';
 import btnDeleteIcon from '../../assets/sprite.svg';
 import {
+  
   selectDateNow,
+  selectDayId,
+  selectDayIdSecond,
   selectEatenProducts,
   selectEatenProductsAfterAddOperation,
 } from 'redux/userData/userDataSelectors';
@@ -21,17 +24,18 @@ const DiaryProductsListItem = () => {
   const productsAfterAddOperation = useSelector(
     selectEatenProductsAfterAddOperation
   );
-  const daySummary = useSelector(state => state.userData.userSummary?.id);
+  const daySummary = useSelector(selectDayId);
+  const daySummarySecond = useSelector(selectDayIdSecond);
   const date = useSelector(selectDateNow);
   const dispatch = useDispatch();
 
   const deleteProductHandler = e => {
     const dataProduct = {
-      dayId: daySummary,
+      dayId: daySummary ? daySummary : daySummarySecond,
       eatenProductId: e.currentTarget.id,
     };
     dispatch(deleteProduct(dataProduct));
-    dispatch(getInfoDay({ date: date }));
+    dispatch(getInfoDay({ date, }));
   };
 
   return (
