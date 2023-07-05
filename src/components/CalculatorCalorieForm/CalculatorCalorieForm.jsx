@@ -19,9 +19,7 @@ import {
   WrapperSubmit,
 } from './CalculatorCalorieForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  calculateDailyRateForSignUser,
-} from 'redux/userData/userDataOperation';
+import { calculateDailyRateForSignUser } from 'redux/userData/userDataOperation';
 import { useNavigate } from 'react-router-dom';
 import { validateCalculatorCalorie } from 'utility/auxiliaryFunctions';
 
@@ -29,7 +27,6 @@ const CalculatorCalorieForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = useSelector(state => state.auth.user.id);
-  console.log(userId);
 
   const formik = useFormik({
     initialValues: {
@@ -39,7 +36,7 @@ const CalculatorCalorieForm = () => {
       desiredWeight: '',
       bloodType: '',
     },
-    validate:validateCalculatorCalorie,
+    validate: validateCalculatorCalorie,
     onSubmit: values => {
       const dataUser = {
         height: values.height,

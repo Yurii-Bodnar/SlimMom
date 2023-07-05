@@ -50,8 +50,6 @@ export const authSlice = createSlice({
     builder.addCase(authRegister.fulfilled, (state, action) => {
       state.error = null;
       state.isLoading = false;
-      console.log(action.payload);
-      // const { email, password, username, id } = action.payload;
       state.user = {
         ...state.user,
         email: action.payload.email,

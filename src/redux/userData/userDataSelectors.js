@@ -13,8 +13,6 @@ export const selectDateNow = state =>
   state.userData.userSummary?.daySummary?.date;
 export const selectEatenProducts = state =>
   state.userData.userSummary?.eatenProducts;
-export const selectEatenProductsAfterAddOperation = state =>
-  state.userData.userSummary?.day?.eatenProducts;
 export const selectDaySummary = state => state.userData.userSummary?.daySummary;
 export const selectDate = state => state.userData.userSummary?.date;
 export const selectSummary = state => state.userData.userSummary;

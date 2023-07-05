@@ -17,11 +17,8 @@ import {
   Svg,
 } from './DiaryAddProductForm.styled';
 import { searchByQueryProduct } from 'redux/products/productsOperation';
-import {
-  selectDataCalendar,
-  selectDateNow,
-} from 'redux/userData/userDataSelectors';
-import { addProduct, getInfoDay } from 'redux/userData/userDataOperation';
+import { selectDataCalendar } from 'redux/userData/userDataSelectors';
+import { addProduct } from 'redux/userData/userDataOperation';
 import { correctDateForAddOperation } from 'utility/auxiliaryFunctions';
 
 const DiaryAddProductForm = () => {
@@ -31,7 +28,6 @@ const DiaryAddProductForm = () => {
   const isMobileFormOpen = useSelector(selectMobileFromAddProduct);
   const productsSearch = useSelector(selectProductSearch);
   const date = useSelector(selectDataCalendar);
-  const dateForGetInfo = useSelector(selectDateNow);
 
   const formik = useFormik({
     initialValues: {
@@ -48,10 +44,15 @@ const DiaryAddProductForm = () => {
       };
 
       dispatch(addProduct(product));
-      dispatch(getInfoDay({ date: dateForGetInfo }));
       formik.resetForm();
     },
   });
+
+  const onChangeHandler = e => {
+    formik.handleChange(e);
+    dispatch(searchByQueryProduct({ search: e.target.value }));
+  };
+
   return (
     <>
       {isMobile && isMobileFormOpen ? (
@@ -62,10 +63,7 @@ const DiaryAddProductForm = () => {
               type="text"
               placeholder="Enter product name"
               list="productsList"
-              onChange={e => {
-                formik.handleChange(e);
-                dispatch(searchByQueryProduct({ search: e.target.value }));
-              }}
+              onChange={onChangeHandler}
               onBlur={formik.handleBlur}
               value={formik.values.name}
             />
@@ -83,7 +81,6 @@ const DiaryAddProductForm = () => {
               value={formik.values.grams}
             />
           </FormBox>
-          {/* </FormBox> */}
           <BtnAddWrapper>
             <BtnAdd type="submit">Add</BtnAdd>
           </BtnAddWrapper>
@@ -97,16 +94,13 @@ const DiaryAddProductForm = () => {
               type="text"
               placeholder="Enter product name"
               list="productsList"
-              onChange={e => {
-                formik.handleChange(e);
-                dispatch(searchByQueryProduct({ search: e.target.value }));
-              }}
+              onChange={onChangeHandler}
               onBlur={formik.handleBlur}
               value={formik.values.name}
             />
             <datalist id="productsList">
               {productsSearch.map(el => (
-                <option value={el.title.ua} id={el._id}></option>
+                <option key={el._id} value={el.title.ua} id={el._id}></option>
               ))}
             </datalist>
             <InputGrams

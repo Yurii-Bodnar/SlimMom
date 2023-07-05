@@ -15,7 +15,6 @@ import burgerMenu from '../../assets/sprite.svg';
 
 import { useIsDesktop, useIsMobile, useIsTablet } from 'hooks/mediaQuery';
 import Navigation from 'components/Navigation/Navigation';
-// import { useEffect } from 'react';
 import UserInfo from 'components/UserInfo/UserInfo';
 import { closeModal, openModal } from 'redux/auth/authSlice';
 
@@ -44,7 +43,6 @@ const Header = () => {
         )}
         {isAuth && isDesktop && (
           <Container>
-            {/* <Logo /> */}
             <Navigation />
           </Container>
         )}

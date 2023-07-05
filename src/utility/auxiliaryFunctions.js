@@ -19,7 +19,6 @@ export const dateToRequest = dateReq => {
   const data = new Date(dateReq).getDate();
   const month = new Date(dateReq).getMonth() + 1;
   const year = new Date(dateReq).getFullYear();
-  console.log(data);
   return (
     year.toString() +
     '-' +

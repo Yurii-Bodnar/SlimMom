@@ -15,7 +15,6 @@ import {
 import {
   selectModalDataDailyRate,
   selectModalDataNotAllowedProducts,
-  selectOpenModal,
 } from 'redux/userData/userDataSelectors';
 import { modalClose } from 'redux/userData/userDataSlice';
 import { useIsTabletOrDesktop } from 'hooks/mediaQuery';
@@ -28,7 +27,6 @@ const DailyCalorieIntake = () => {
   const notAllowedProducts = useSelector(selectModalDataNotAllowedProducts);
   const dispatch = useDispatch();
   const isTabletOrDesc = useIsTabletOrDesktop();
-  const isModalOpen = useSelector(selectOpenModal);
   const modalRoot = document.querySelector('#modal');
 
   useEffect(() => {
@@ -42,7 +40,7 @@ const DailyCalorieIntake = () => {
       window.removeEventListener('keydown', handleClose);
       document.body.style.overflow = 'auto';
     };
-  }, [isModalOpen, dispatch]);
+  }, [dispatch]);
 
   const closeBackdrop = e => {
     if (e.target === e.currentTarget) {
@@ -51,7 +49,7 @@ const DailyCalorieIntake = () => {
   };
 
   return createPortal(
-    <Container onClick={e => closeBackdrop(e)}>
+    <Container onClick={closeBackdrop}>
       <Wrapper>
         {isTabletOrDesc && (
           <>

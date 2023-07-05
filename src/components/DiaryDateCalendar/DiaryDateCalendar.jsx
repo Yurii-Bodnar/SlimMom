@@ -37,14 +37,13 @@ const DiaryDateCalendar = () => {
     }
   };
   const handleClose = event => {
-    console.log(event);
     if (event.target === event.currentTarget) {
       setOpenCalendar(false);
     }
   };
 
   return (
-    <Container onClick={e => handleClose(e)}>
+    <Container onClick={handleClose}>
       <Section>
         <div onClick={handleClick}>
           <TitleDate>

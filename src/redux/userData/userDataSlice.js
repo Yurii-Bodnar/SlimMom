@@ -11,7 +11,7 @@ import {
 const initialState = {
   user: null,
   data: null,
-  userSummary: null,
+  userSummary: { eatenProducts: [], date: '', daySummary: {}, id: '' },
   modalOpen: false,
   modalData: [],
   isLoading: false,
@@ -38,7 +38,6 @@ export const userDataSlice = createSlice({
       state.modalOpen = false;
     },
     setDataCalendar(state, action) {
-      // console.log(action.payload);
       state.data = action.payload;
     },
   },
@@ -70,14 +69,32 @@ export const userDataSlice = createSlice({
     builder.addCase(getInfoDay.pending, pendingHandlerAuth);
     builder.addCase(getInfoDay.rejected, rejectedHandler);
     builder.addCase(getInfoDay.fulfilled, (state, action) => {
-      state.userSummary = action.payload;
+      state.userSummary = {
+        id: action.payload.id,
+        eatenProducts: action.payload.eatenProducts,
+        daySummary: action.payload.daySummary,
+        date: action.payload.data,
+      };
       state.isLoading = false;
       state.error = '';
     });
     builder.addCase(addProduct.pending, pendingHandlerAuth);
     builder.addCase(addProduct.rejected, rejectedHandler);
     builder.addCase(addProduct.fulfilled, (state, action) => {
-      state.userSummary = action.payload;
+      state.userSummary = {
+        id: action.payload?.newDay?.id
+          ? action.payload.newDay.id
+          : action.payload?.day?.id,
+        eatenProducts: action.payload?.newDay?.eatenProducts
+          ? action.payload.newDay.eatenProducts
+          : action.payload?.day?.eatenProducts,
+        daySummary: action.payload?.newSummary
+          ? action.payload.newSummary
+          : action.payload?.daySummary,
+        date: action.payload?.newDay?.date
+          ? action.payload?.newDay.date
+          : action.payload?.day?.date,
+      };
       state.isLoading = false;
       state.error = '';
     });

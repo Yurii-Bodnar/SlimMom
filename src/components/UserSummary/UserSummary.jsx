@@ -50,9 +50,11 @@ const UserSummary = () => {
         <ItemSummary>
           <Text>Consumed</Text>
           <Text>
-            {!summary?.daySummary?.kcalConsumed && !summary?.kcalConsumed
+            {!summary?.daySummary?.kcalConsumed?.toFixed(1) &&
+            !summary?.kcalConsumedkcalConsumed?.toFixed(1)
               ? '0'
-              : summary?.daySummary?.kcalConsumed || summary?.kcalConsumed}{' '}
+              : summary?.daySummary?.kcalConsumed?.toFixed(1) ||
+                summary?.kcalConsumed?.toFixed(1)}{' '}
             kcal
           </Text>
         </ItemSummary>

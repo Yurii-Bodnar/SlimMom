@@ -33,7 +33,6 @@ const RegistrationForm = () => {
       };
       dispatch(authRegister(user));
       navigate('/login');
-      console.log('lalalal');
     },
   });
   return (

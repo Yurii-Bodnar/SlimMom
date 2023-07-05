@@ -19,7 +19,6 @@ export const calculateDailyRateForSignUser = createAsyncThunk(
   '/daily-rate/userId',
   async ({ userId, dataUser }, thunkApi) => {
     try {
-      console.log(userId);
       const state = thunkApi.getState();
       const token = state.auth.token;
       setAuthHeader(token);

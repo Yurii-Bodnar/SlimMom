@@ -11,8 +11,7 @@ import { refreshUser } from 'redux/auth/authOperation';
 import bgForDesc from '../assets/images/background-desc.png';
 import bgForTablet from '../assets/images/background-tabl.png';
 import { useIsDesktop, useIsMobile, useIsTablet } from 'hooks/mediaQuery';
-import { getCurrentUser, getInfoDay } from 'redux/userData/userDataOperation';
-import { dateToRequest } from 'utility/auxiliaryFunctions';
+import { getCurrentUser } from 'redux/userData/userDataOperation';
 
 const MainPage = lazy(() => import('../Pages/MainPage/MainPage'));
 const RegisterPage = lazy(() =>
@@ -35,7 +34,7 @@ export const App = () => {
 
   useEffect(() => {
     isSignInUser === '' && dispatch(refreshUser(sid));
-  }, [dispatch, sid, isSignInUser]);
+  }, [dispatch, isSignInUser, sid]);
 
   useEffect(() => {
     if (!isSignInUser && isDesktop) {
@@ -53,13 +52,13 @@ export const App = () => {
       document.body.style = 'none';
     }
   }, [isDesktop, isMobile, isSignInUser, isTablet]);
+
   useEffect(() => {
     if (isLoggedInUser) {
       dispatch(getCurrentUser());
-      const value = new Date();
-      dispatch(getInfoDay({ date: dateToRequest(value) }));
     }
-  }, [dispatch, isLoggedInUser, isSignInUser]);
+  }, [dispatch, isLoggedInUser]);
+
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
