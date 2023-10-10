@@ -1,4 +1,7 @@
 A simple application for monitoring your weight. 
+
+
+
 In which you can enter your data to get the number of calories you can consume per day. 
 <img width="947" alt="image" src="https://github.com/Yurii-Bodnar/SlimMom/assets/106067762/888f7d00-735d-4221-8cb2-5877e2b2d7b8">
 
